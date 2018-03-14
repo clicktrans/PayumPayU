@@ -290,6 +290,7 @@ class SetPayUAction implements ApiAwareInterface, ActionInterface, GenericTokenF
     private function updateStatus($request, $openPayU, $model)
     {
         $response = $openPayU->retrieve($model['orderId'])->getResponse();
+        $model['payUResponse'] = $response;
         if ($response->status->statusCode == 'SUCCESS') {
             $model['status'] = $response->orders[0]->status;
 
